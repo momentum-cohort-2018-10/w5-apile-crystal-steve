@@ -9,6 +9,7 @@ django-registration-redux = "==2.0"
 
 [dev-packages]
 pylint = "*"
+"flake8" = "*"
 
 [requires]
 python_version = "3.7"

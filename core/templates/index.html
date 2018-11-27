@@ -4,6 +4,10 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>Welcome to Apile: Crystal-Steve Edition</h1>
-    <p>I am the best collection of links ever.</p>
+    {% for post in posts %}
+        <h2><a href="{% url 'post_detail' slug=post.slug %}">
+            {{post.title }}
+        </a></h2>
+        <p>{{ post.description }}</p>
+    {% endfor %}
 {% endblock content %}

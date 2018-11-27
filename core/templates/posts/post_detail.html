@@ -7,4 +7,7 @@
     <h3>{{ post.title }}  {{ post.url }}</h3> 
     <p>{{ post.description }}</p>
     <p>Author: {{ post.author }}</p>
+    <a href="{% url 'edit_post' slug=post.slug %}">
+        Edit
+    </a>
 {% endblock content %}

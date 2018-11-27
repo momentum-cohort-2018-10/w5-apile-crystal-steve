@@ -8,7 +8,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     url = models.URLField()
-    description = models.CharField(max_length=255)
+    description = models.TextField(max_length=255)
 
 class Comment(models.Model):
     commenter = models.ForeignKey(to=User, on_delete=models.CASCADE,

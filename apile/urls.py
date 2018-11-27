@@ -33,5 +33,7 @@ urlpatterns = [
     name="password_reset_complete"),
     path('accounts/', include('registration.backends.simple.urls')),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
+    path('posts/<slug>/edit/',
+        views.edit_post, name='edit_post'),
     path('admin/', admin.site.urls),
 ]

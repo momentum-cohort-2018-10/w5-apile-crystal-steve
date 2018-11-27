@@ -32,5 +32,6 @@ urlpatterns = [
     {'template_name': 'registration/password_reset_complete.html'},
     name="password_reset_complete"),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('admin/', admin.site.urls),
 ]

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+
+EMAIL_BACKEND = 'testing@example.com'
+DEFAULT_FROM_EMAIL = ''
+EMAIL_HOST_USER = ''
+EMAIL_USE_TLS = False
+EMAIL_PORT = 1025
+
+
+LOGIN_REDIRECT_URL = "home"

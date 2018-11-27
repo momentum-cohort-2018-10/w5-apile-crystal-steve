@@ -1,0 +1,33 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+            Welcome to Apile: Crystal-Steve Edition!
+            <!-- please change if you think this is too cheesy -->
+            {% endblock title %}
+        </title>
+        <!--bulma or tachyons or CSS style sheet stuff here  -->
+        {% block header %}{% endblock header %}
+    </head>
+    <body>
+        <!-- header can go here -->
+        <nav>
+            <!-- need to flesh out nav content with other functionality -->
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
+                <li><a href="{% url 'registration_register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        
+        
+        </nav>
+        {% block content %}{% endblock content %}
+        {% block footer %}{% endblock footer %}
+    </body>
+    </html>

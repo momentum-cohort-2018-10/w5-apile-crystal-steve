@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = "*"
+django-registration-redux = "==2.0"
 
 [dev-packages]
 pylint = "*"

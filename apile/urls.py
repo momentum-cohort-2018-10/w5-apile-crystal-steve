@@ -13,9 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from core.backends import MyRegistrationView -- this is part of having people create "something" - not sure this is applicable
+from django.contrib.auth.views import (
+    PasswordResetView,
+    PasswordResetDoneView,
+    PasswordResetConfirmView,
+    PasswordResetCompleteView,)
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from core import views
 
 urlpatterns = [
+    path('', views.index, name='home'),
+    path('accounts/password/reset/', PasswordResetView, {'template_name': 'registration/password_reset_form.html'}, name="password_reset"),
+    path('accounts/password/reset/done/', PasswordResetDoneView, {'template_name': 'registration/password_reset_done.html'}, name="password_reset_done"),
+    path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView, {'template_name': 'registration/password_reset_confirm.html'}, name="password_reset_confirm"),
+    path('accounts/password/done/', PasswordResetCompleteView,
+    {'template_name': 'registration/password_reset_complete.html'},
+    name="password_reset_complete"),
+    path('accounts/', include('registration.backends.simple.urls')),
     path('admin/', admin.site.urls),
 ]

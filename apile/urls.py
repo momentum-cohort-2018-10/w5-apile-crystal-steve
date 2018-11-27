@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-# from core.backends import MyRegistrationView -- this is part of having people create "something"
+# from core.backends import MyRegistrationView -- this is part of having people create "something" - not sure this is applicable
 from django.contrib.auth.views import (
     PasswordResetView,
     PasswordResetDoneView,

@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'registration',
-
-    #third party apps
-    'django_extensions',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +47,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -139,4 +138,9 @@ EMAIL_PORT = 1025
 
 
 LOGIN_REDIRECT_URL = "home"
+
+
+
+INTERNAL_IPS = '127.0.0.1'
+
 django_heroku.settings(locals())

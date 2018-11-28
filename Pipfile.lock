@@ -185,6 +185,14 @@
             ],
             "version": "==0.6.1"
         },
+        "mimesis": {
+            "hashes": [
+                "sha256:2a17aa98cc8aff2c0b1828312e213a515030ed57a1c7b61fc07a87150cb0f25f",
+                "sha256:4b856023acdaaefe2e10bbfea9fd4cb6fa9adbbbe9618a8f796aa8887b58e6f2"
+            ],
+            "index": "pypi",
+            "version": "==2.1.0"
+        },
         "pycodestyle": {
             "hashes": [
                 "sha256:cbc619d09254895b0d12c2c691e237b2e91e9b2ecf5e84c26b35400f93dcfb83",

@@ -31,8 +31,12 @@ class Command(BaseCommand):
         #     posts.append(post)
         # print("Post Loaded")
 
+
         from django.contrib.auth.models import User
         from mimesis import Person
+
+        print("deleting users")
+        User.objects.filter(is_superuser=False).delete()
 
         users = []
         person = Person()

@@ -6,10 +6,14 @@ name = "pypi"
 [packages]
 django = "*"
 django-registration-redux = "==2.0"
+faker = "*"
+django-extensions = "*"
+werkzeug = "*"
 
 [dev-packages]
 pylint = "*"
 "flake8" = "*"
+mimesis = "*"
 
 [requires]
 python_version = "3.7"

@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+
 # Create your models here.
 class Post(models.Model):
     author = models.ForeignKey(to=User, on_delete=models.CASCADE,
@@ -10,10 +11,12 @@ class Post(models.Model):
     url = models.URLField()
     description = models.TextField(max_length=255)
 
+
 class Comment(models.Model):
     commenter = models.ForeignKey(to=User, on_delete=models.CASCADE,
             blank=True, null=True)
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
+
 
 class Vote(models.Model):
     voter = models.ForeignKey(to=User, on_delete=models.CASCADE,

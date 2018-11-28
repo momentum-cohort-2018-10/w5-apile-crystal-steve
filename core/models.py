@@ -16,6 +16,7 @@ class Comment(models.Model):
     commenter = models.ForeignKey(to=User, on_delete=models.CASCADE,
             blank=True, null=True)
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
+    comment = models.TextField()
 
 
 class Vote(models.Model):

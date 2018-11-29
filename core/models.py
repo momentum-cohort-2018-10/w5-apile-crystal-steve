@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 
 
 # Create your models here.
@@ -16,7 +17,8 @@ class Comment(models.Model):
     commenter = models.ForeignKey(to=User, on_delete=models.CASCADE,
             blank=True, null=True)
     post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
-    comment = models.TextField()
+    comment = models.TextField(default="")
+    created_date = models.DateTimeField(default=timezone.datetime.now)
 
 
 class Vote(models.Model):

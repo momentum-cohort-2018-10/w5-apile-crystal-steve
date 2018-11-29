@@ -7,8 +7,14 @@
     <h3>{{ post.title }}  {{ post.url }}</h3> 
     <p>{{ post.description }}</p>
     <p>Author: {{ post.author }}</p>
-    <a href="{% url 'edit_post' slug=post.slug %}">
-        Edit
-    </a>
-    <!-- PLACE HOLDER FOR COMMENTS GO HERE IN POST_DETAIL.HTML -->
+    <a href="{% url 'create_comment' slug=post.slug %}">Comment on {{ post.title }}</a>   ||  
+    <a href="{% url 'edit_post' slug=post.slug %}">Edit {{ post.title }}</a>  
+
+    <p>Comments on {{ post.title }}:</p>
+
+    <!-- {% for comment in post.comments.all() %}
+        {{ comment.commenter }} said on {{ comment.created_date }}:
+        <p>{{ comment.comment }}</p>
+    {% endfor %} -->
+
 {% endblock content %}

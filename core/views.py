@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
-from core.forms import PostForm
-from core.models import Post
+from core.forms import PostForm, CommentForm
+from core.models import Post, Comment
 
 
 def index(request):
@@ -18,9 +19,10 @@ def post_detail(request, slug):
     })
 
 
+@login_required
 def edit_post(request, slug):
     """
-    user can edit links with form
+    user can edit posts with form - consider changing for admin use only
     """
     post = Post.objects.get(slug=slug)
     form_class = PostForm
@@ -51,5 +53,25 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'posts/create_post.html', {
+        'form': form,
+    })
+
+
+def create_comment(request, slug):
+    """user can create comments on existing posts"""
+    post = Post.objects.get(slug=slug)
+    form_class = CommentForm
+    if request.method == 'POST':
+        form = form_class(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.save()
+            return redirect('post_detail', slug=slug)
+    else:
+        form = CommentForm()
+    return render(request, 'posts/create_comment.html', {
+        'post': post,
         'form': form,
     })

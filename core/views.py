@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
 from core.forms import PostForm, CommentForm
-from core.models import Post, Comment
+from core.models import Post, Comment, Votes
 
 
 def index(request):

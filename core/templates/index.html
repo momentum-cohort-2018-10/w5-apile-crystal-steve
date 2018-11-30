@@ -9,6 +9,7 @@
             {{post.title }}
         </a></h2>
         <p>{{ post.description }}</p>
+        <p>Votes: {{post.vote_set.count}}</p>
         <p>Comments: {{ post.comment_set.count }}</p>
     {% endfor %}
 {% endblock content %}

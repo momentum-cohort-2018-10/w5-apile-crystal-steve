@@ -28,7 +28,7 @@ if settings.DEBUG:
     import debug_toolbar
 
 urlpatterns = [
-    path('__debug__/', include (debug_toolbar.urls)),
+    path('__debug__/', include(debug_toolbar.urls)),
     path('', views.index, name='home'),
     path('accounts/password/reset/', PasswordResetView, {'template_name': 'registration/password_reset_form.html'}, name="password_reset"),
     path('accounts/password/reset/done/', PasswordResetDoneView, {'template_name': 'registration/password_reset_done.html'}, name="password_reset_done"),
@@ -39,7 +39,7 @@ urlpatterns = [
     path('accounts/', include('registration.backends.simple.urls')),
     path('posts/create/', views.create_post, name='create_post'),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
-    path('posts/<slug>/edit/',
-        views.edit_post, name='edit_post'),
+    path('posts/<slug>/comment/', views.create_comment, name='create_comment'),
+    path('posts/<slug>/edit/', views.edit_post, name='edit_post'),
     path('admin/', admin.site.urls),
 ]

@@ -1,7 +1,1 @@
-{
-    "python.pythonPath": "/Users/stevenpmarks/.local/share/virtualenvs/w5-apile-crystal-steve-OesuQpPu/bin/python",
-    "python.linting.pylintArgs": [
-        "--load-plugins",
-        "pylint_django"
-    ],
-}
+{}

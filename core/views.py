@@ -49,7 +49,7 @@ def create_post(request):
             post.author = request.user
             post.slug = slugify(post.title)
             post.save()
-            return redirect('index.html')
+            return redirect('home')
     else:
         form = PostForm()
     return render(request, 'posts/create_post.html', {
@@ -65,7 +65,7 @@ def create_comment(request, slug):
         form = form_class(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.author = request.user
+            comment.commenter = request.user
             comment.post = post
             comment.save()
             return redirect('post_detail', slug=slug)

@@ -11,10 +11,11 @@
     <a href="{% url 'edit_post' slug=post.slug %}">Edit {{ post.title }}</a>  
 
     <p>Comments on {{ post.title }}:</p>
+        {% for comment in post.comment_set.all %}
+            <strong>{{ comment.commenter }} said:</strong>
+            <i>{{ comment.comment|linebreaks }}</i>
+            
+        {% endfor %} 
 
-    <!-- {% for comment in post.comments.all() %}
-        {{ comment.commenter }} said on {{ comment.created_date }}:
-        <p>{{ comment.comment }}</p>
-    {% endfor %} -->
 
 {% endblock content %}

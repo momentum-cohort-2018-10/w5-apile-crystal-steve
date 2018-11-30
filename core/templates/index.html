@@ -9,6 +9,6 @@
             {{post.title }}
         </a></h2>
         <p>{{ post.description }}</p>
-        <!-- ADD # OF COMMENTS, VOTES, DATE ADDED INFO -->
+        <p>Comments: {{ post.comment_set.count }}</p>
     {% endfor %}
 {% endblock content %}

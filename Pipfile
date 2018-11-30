@@ -10,6 +10,7 @@ django-debug-toolbar = "*"
 "psycopg2" = "*"
 gunicorn = "*"
 django-heroku = "*"
+django-extensions = "*"
 
 [dev-packages]
 pylint = "*"

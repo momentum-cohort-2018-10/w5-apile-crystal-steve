@@ -12,10 +12,9 @@
 
     <p>Comments on {{ post.title }}:</p>
         {% for comment in post.comment_set.all %}
-            {{ comment.comment|linebreaks }}
-                {% for commenter in post.comment_set.all %}
-                    {{ comment.commenter }}
-                {% endfor %}
+            <strong>{{ comment.commenter }} said:</strong>
+            <i>{{ comment.comment|linebreaks }}</i>
+            
         {% endfor %} 
 
 

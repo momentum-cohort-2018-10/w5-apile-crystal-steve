@@ -5,15 +5,17 @@ from django.db.models import Count
 from core.forms import PostForm, CommentForm
 from core.models import Post, Comment, Vote
 from django.contrib import messages
-
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.shortcuts import render
 
 
 def index(request):
     posts = Post.objects.all()
-    return render(request, 'index.html', {
-        'posts': posts,
-    })
+    paginator = Paginator(posts, 10)
 
+    page = request.GET.get('page')
+    posts = paginator.get_page(page)
+    return render(request, 'index.html', {'posts': posts})
 
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
@@ -21,6 +23,13 @@ def post_detail(request, slug):
         'post': post,
     })
 
+# def listing(request):
+#     post_list = Posts.objects.all()
+#     paginator = Paginator(post_list, 3)
+
+#     page = request.GET.get('page')
+#     posts = paginator.get_page(page)
+#     return render(request, 'index.html', {'posts': posts})
 
 @login_required
 def edit_post(request, slug):
@@ -41,7 +50,6 @@ def edit_post(request, slug):
             'form': form,
     })
 
-
 def create_post(request):
     """user can create a post"""
     form_class = PostForm
@@ -58,7 +66,6 @@ def create_post(request):
     return render(request, 'posts/create_post.html', {
         'form': form,
     })
-
 
 def create_comment(request, slug):
     """user can create comments on existing posts"""
@@ -84,19 +91,19 @@ def favorites_list(request):
      posts = request.user.vote_set_posts.all()
      return render_post_list(request, 'my favorite posts', posts)
 
-def vote_button(request, slug):
-    """
-    gets the post that will be voted on 
-    """
+# def vote_button(request, slug):
+#     """
+#     gets the post that will be voted on 
+#     """
 
-    post = Post.objects.get(slug=slug)
-    if post in request.voter.vote_set.all():
-        post.vote_set.get(user=request.user).delete()
-        #message = f"you have taken back your vote"
-    else:
-        post.vote_set.create(user=request.user)
-        #message = f"you have just  up voted {post.title}."
+#     post = Post.objects.get(slug=slug)
+#     if post in request.voter.vote_set.all():
+#         post.vote_set.get(user=request.user).delete()
+#         #message = f"you have taken back your vote"
+#     else:
+#         post.vote_set.create(user=request.user)
+#         #message = f"you have just  up voted {post.title}."
 
-    #messages.add_message(request, messages.INFO, message)
-    #return redirect(f'/#post-{post.slug}')
-    return render('thanks dude')
+#     #messages.add_message(request, messages.INFO, message)
+#     #return redirect(f'/#post-{post.slug}')
+#     return render('thanks dude')

@@ -95,8 +95,8 @@ def create_comment(request, slug):
 
 
 def upvote_list(request):
-     posts = request.user.vote_set_posts.all()
-     return render_post_list(request, 'my up voted posts', posts)
+    posts = request.user.vote_set_posts.all()
+    return render_post_list(request, 'my up voted posts', posts)
 
 @require_POST
 def voting(request, slug):

@@ -145,3 +145,11 @@ LOGIN_REDIRECT_URL = "home"
 
 INTERNAL_IPS = '127.0.0.1'
 django_heroku.settings(locals())
+
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: "notification is-primary",
+    messages.INFO: "notification is-link",
+    messages.WARNING: "notification is-warning",
+}

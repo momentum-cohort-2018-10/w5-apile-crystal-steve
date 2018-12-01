@@ -5,18 +5,32 @@
 
 {% block content %}
     {% for post in posts %}
-        <h2><a href="{% url 'post_detail' slug=post.slug %}">
-            {{ post.title }}
-        </a></h2>
+        {% if post.url %}
+            <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
+        {% else %} 
+            <h4><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h4>
+        {% endif %}
         <p>{{ post.description }}</p>
         <p>Votes: {{post.vote_set.count}}</p>
         <p>Comments: {{ post.comment_set.count }}</p>
-        {% comment %} {% if request.user.is_authenticated %}
-        <form method="POST" action="{% url 'vote_button' slug=slug %}">
+        {% if request.user.is_authenticated %}
+            <form method="POST" action="{% url 'voting' slug=post.slug %}">
             {% csrf_token %}
-            <button class="button">Vote</button>
-        {% endif %} {% endcomment %}
+            <button type="submit">
+                {% if post in upvote_list %}
+
+                &#xf0aa;
+
+                {% else %}
+        
+                &#xf0ab; 
+
+                {% endif %}
+            </button>
+            </form>
+        {% endif %}
     {% endfor %}
+    
     <div class="pagination">
         <span class="step-links">
             {% if posts.has_previous %}

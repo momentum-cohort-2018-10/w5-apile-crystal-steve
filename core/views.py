@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
 from django.db.models import Count
 from core.forms import PostForm, CommentForm
 from core.models import Post, Comment, Vote
@@ -92,24 +93,37 @@ def create_comment(request, slug):
         'form': form,
     })
 
-@login_required
-def favorites_list(request):
-     posts = request.user.vote_set_posts.all()
-     return render_post_list(request, 'my favorite posts', posts)
 
-# def vote_button(request, slug):
+def upvote_list(request):
+     posts = request.user.vote_set_posts.all()
+     return render_post_list(request, 'my up voted posts', posts)
+
+@require_POST
+def voting(request, slug):
+    if request.method == "POST":
+        post = Post.objects.get(slug=slug)
+        if post in request.user.upvote_list.all():
+            post.vote_set.get(user = request.user).delete()
+            messages.add_message(request,messages.INFO,"WTF Dude!")
+
+        else:
+            post.vote_set.create(user=request.user)
+            messages.add_message(request,messages.INFO,"WOW, Thanks Man!")
+    return redirect(f'/#post-{post.slug}')
+
+
+# def vo(request, slug):
 #     """
 #     gets the post that will be voted on 
 #     """
-
 #     post = Post.objects.get(slug=slug)
 #     if post in request.voter.vote_set.all():
 #         post.vote_set.get(user=request.user).delete()
 #         #message = f"you have taken back your vote"
 #     else:
 #         post.vote_set.create(user=request.user)
-#         #message = f"you have just  up voted {post.title}."
+#         message = f"you have just  up voted {post.title}."
 
-#     #messages.add_message(request, messages.INFO, message)
-#     #return redirect(f'/#post-{post.slug}')
-#     return render('thanks dude')
+#         messages.add_message(request, messages.INFO, message)
+#         return redirect(f'/#post-{post.slug}')
+#         return render('thanks dude')

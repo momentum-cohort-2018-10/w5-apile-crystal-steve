@@ -42,6 +42,8 @@ def edit_post(request, slug):
         form = form_class(data=request.POST, instance=post)
         if form.is_valid():
             form.save()
+            success_msg = f"Your edits have been incorporated successfully.  Thanks."
+            messages.add_message(request, messages.SUCCESS, success_msg)
             return redirect('post_detail', slug=post.slug)
     else:
         form = form_class(instance=post)
@@ -60,6 +62,8 @@ def create_post(request):
             post.author = request.user
             post.slug = slugify(post.title)
             post.save()
+            success_msg = f"Your post has been created!  Thanks."
+            messages.add_message(request, messages.SUCCESS, success_msg)
             return redirect('home')
     else:
         form = PostForm()
@@ -78,6 +82,8 @@ def create_comment(request, slug):
             comment.commenter = request.user
             comment.post = post
             comment.save()
+            success_msg = f"Thanks for sharing your opinion."
+            messages.add_message(request, messages.SUCCESS, success_msg)
             return redirect('post_detail', slug=slug)
     else:
         form = CommentForm()

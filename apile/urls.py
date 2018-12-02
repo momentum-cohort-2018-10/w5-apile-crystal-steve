@@ -24,6 +24,7 @@ from django.contrib import admin
 from django.urls import include, path
 from core import views
 
+
 if settings.DEBUG:
     import debug_toolbar
 
@@ -41,5 +42,7 @@ urlpatterns = [
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.create_comment, name='create_comment'),
     path('posts/<slug>/edit/', views.edit_post, name='edit_post'),
+    path('posts/<slug>/voting/', views.voting, name="voting"),
+    path('test_vote/',views.test_vote, name='test_vote'),
     path('admin/', admin.site.urls),
 ]

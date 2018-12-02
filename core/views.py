@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.views.decorators.http import require_POST
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
 from django.db.models import Count
@@ -17,6 +19,7 @@ def index(request):
     posts = paginator.get_page(page)
     return render(request, 'index.html', {'posts': posts})
 
+
 def post_detail(request, slug):
     post = Post.objects.get(slug=slug)
     return render(request, 'posts/post_detail.html', {
@@ -30,6 +33,17 @@ def post_detail(request, slug):
 #     page = request.GET.get('page')
 #     posts = paginator.get_page(page)
 #     return render(request, 'index.html', {'posts': posts})
+
+
+@login_required
+@require_POST
+def delete_post(request, slug):
+    """user can delete own post"""
+    post = Post.objects.get(slug=slug)
+    if request.user == post.author:
+        post.delete()
+    return redirect('home')
+
 
 @login_required
 def edit_post(request, slug):
@@ -75,6 +89,16 @@ def create_post(request):
 
 
 @login_required
+@require_POST
+def delete_comment(request, slug, comment):
+    """user can delete own comment"""
+    comment = Comment.objects.get(comment=comment)
+    if request.user == comment.commenter:
+        comment.delete()
+    return redirect('post_detail', slug=slug)
+
+
+@login_required
 def create_comment(request, slug):
     """user can create comments on existing posts"""
     post = Post.objects.get(slug=slug)
@@ -96,10 +120,13 @@ def create_comment(request, slug):
         'form': form,
     })
 
+
 @login_required
 def favorites_list(request):
-     posts = request.user.vote_set_posts.all()
-     return render_post_list(request, 'my favorite posts', posts)
+    posts = request.user.vote_set_posts.all()
+    return render_post_list(request, 'my favorite posts', posts)
+
+
 
 # def vote_button(request, slug):
 #     """

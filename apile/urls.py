@@ -38,6 +38,8 @@ urlpatterns = [
         name="password_reset_complete"),
     path('accounts/', include('registration.backends.simple.urls')),
     path('posts/create/', views.create_post, name='create_post'),
+    path('posts/<slug>/delete', views.delete_post, name='delete_post'),
+    path('posts/<slug>/delete_comment', views.delete_comment, name='delete_comment'),
     path('posts/<slug>/', views.post_detail, name='post_detail'),
     path('posts/<slug>/comment/', views.create_comment, name='create_comment'),
     path('posts/<slug>/edit/', views.edit_post, name='edit_post'),

@@ -10,13 +10,25 @@
     <a href="{% url 'create_comment' slug=post.slug %}">Comment on {{ post.title }}</a>   ||  
     <a href="{% url 'edit_post' slug=post.slug %}">Edit {{ post.title }}</a>  
 
+    {% if request.user == post.author %}
+        <form method="POST" action="{% url 'delete_post' slug=post.slug %}">
+            {% csrf_token %}
+            <button type="submit">Delete your post</button></a>
+        </form>
+    {% endif %}
+
     <p>Comments on {{ post.title }}:</p>
-        {% for comment in post.comment_set.all reversed %}
-            
-        <strong>{{ comment.commenter }} said on {{ comment.created_date }}:</strong>
-        <i>{{ comment.comment|linebreaks }}</i>
-            
-        {% endfor %} 
+    {% for comment in post.comment_set.all reversed %}    
+    <strong>{{ comment.commenter }} said on {{ comment.created_date }}:</strong>
+    <i>{{ comment.comment|linebreaks }}</i>
+    {% endfor %} 
+
+    {% if request.user == comment.commenter %}
+        <form method="POST" action="{% url 'delete_comment' slug=post.slug %}">
+            {% csrf_token %}
+            <button type="submit">Delete your comment</button></a>
+        </form>
+    {% endif %}
 
 
 {% endblock content %}

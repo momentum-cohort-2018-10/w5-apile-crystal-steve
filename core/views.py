@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
@@ -90,12 +90,14 @@ def create_post(request):
 
 @login_required
 @require_POST
-def delete_comment(request, slug, comment):
+def delete_comment(request, comment_id):
     """user can delete own comment"""
-    comment = Comment.objects.get(comment=comment)
+    comment = Comment.objects.get(pk=comment_id)
     if request.user == comment.commenter:
         comment.delete()
-    return redirect('post_detail', slug=slug)
+    warning_msg = f"Your comment has been deleted."
+    messages.add_message(request, messages.WARNING, warning_msg)
+    return redirect(f'/#post-{comment.pk}')
 
 
 @login_required

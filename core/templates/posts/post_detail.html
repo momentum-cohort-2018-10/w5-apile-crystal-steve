@@ -21,14 +21,14 @@
     {% for comment in post.comment_set.all reversed %}    
     <strong>{{ comment.commenter }} said on {{ comment.created_date }}:</strong>
     <i>{{ comment.comment|linebreaks }}</i>
+    
+
+        {% if request.user == comment.commenter %}
+            <form method="POST" action="{% url 'delete_comment' comment_id=comment.pk %}">
+                {% csrf_token %}
+                <button type="submit">Delete your comment</button></a>
+            </form>
+        {% endif %}
     {% endfor %} 
-
-    {% if request.user == comment.commenter %}
-        <form method="POST" action="{% url 'delete_comment' slug=post.slug %}">
-            {% csrf_token %}
-            <button type="submit">Delete your comment</button></a>
-        </form>
-    {% endif %}
-
 
 {% endblock content %}

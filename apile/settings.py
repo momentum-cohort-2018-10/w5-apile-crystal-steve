@@ -152,4 +152,5 @@ MESSAGE_TAGS = {
     messages.SUCCESS: "notification is-primary",
     messages.INFO: "notification is-link",
     messages.WARNING: "notification is-warning",
+    messages.ERROR: "notification is-danger",
 }

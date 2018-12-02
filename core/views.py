@@ -52,6 +52,8 @@ def edit_post(request, slug):
             'form': form,
     })
 
+
+@login_required
 def create_post(request):
     """user can create a post"""
     form_class = PostForm
@@ -71,6 +73,8 @@ def create_post(request):
         'form': form,
     })
 
+
+@login_required
 def create_comment(request, slug):
     """user can create comments on existing posts"""
     post = Post.objects.get(slug=slug)

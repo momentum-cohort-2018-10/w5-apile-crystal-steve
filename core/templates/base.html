@@ -10,6 +10,7 @@
             {% endblock title %}
         </title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         {% block header %}{% endblock header %}
     </head>
@@ -39,12 +40,14 @@
             </a>
             {% endif %}
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            
+
+            {% comment %} <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                Maybe put some logic here for commenting on post 
+                Edit Post
                 </a>
 
-                <div class="navbar-dropdown">
+                {% comment %} <div class="navbar-dropdown">
                 <a class="navbar-item">
                     About
                 </a>
@@ -59,8 +62,8 @@
                     Report an issue
                 </a>
                 </div>
-            </div>
-            </div>
+            </div> 
+            </div> {% endcomment %}
 
             <div class="navbar-end">
                 <div class="navbar-item">

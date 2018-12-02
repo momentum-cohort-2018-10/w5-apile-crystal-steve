@@ -5,6 +5,7 @@ from django.views.decorators.http import require_POST
 from django.db.models import Count
 from core.forms import PostForm, CommentForm
 from core.models import Post, Comment, Vote
+from django.contrib.auth.models import User
 from django.contrib import messages
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render
@@ -110,6 +111,13 @@ def voting(request, slug):
             post.vote_set.create(user=request.user)
             messages.add_message(request,messages.INFO,"WOW, Thanks Man!")
     return redirect(f'/#post-{post.slug}')
+
+def test_vote(request):
+    post = Post.objects.first()
+    voter = User.objects.first()
+    vote = Vote.objects.create(post = post, voter = voter)
+    context = {'vote': vote}
+    return render(request, 'test/test_vote.html')
 
 
 # def vo(request, slug):

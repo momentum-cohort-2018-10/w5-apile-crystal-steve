@@ -4,7 +4,7 @@
 {% endblock title %}
 
 {% block content %}
-        <!-- <body class="georgia">
+        {% comment %} <body class="georgia">
         {% for post in posts %}
             {% if post.url %}
         <section class="section">
@@ -27,9 +27,9 @@
     {% for post in posts %}
         {% if post.url %}
             <h4><a href="{{ post.url }}">{{ post.title }}</a></h4>
-        {% else %}  -->
-        <h4><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h4>
-        <!-- {% endif %} -->
+        {% else %}
+            <h4><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h4>
+        {% endif %}
         <p>{{ post.description }}</p>
         <p>Votes: {{post.vote_set.count}}</p>
         <p>Comments: {{ post.comment_set.count }}</p>
@@ -37,7 +37,7 @@
             <form method="POST" action="{% url 'voting' slug=post.slug %}">
             {% csrf_token %}
             <button type="submit">
-                {% if post in upvote_list %}
+                {% comment %} {% if post in upvote_list %}
 
                 &#xf0aa;
 
@@ -45,7 +45,7 @@
         
                 &#xf0ab; 
 
-                {% endif %}
+                {% endif %} {% endcomment %}
             </button>
             </form>
         {% endif %}

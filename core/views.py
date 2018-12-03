@@ -123,34 +123,32 @@ def create_comment(request, slug):
         'form': form,
     })
 
-@login_required
-def favorites_list(request):
-    posts = request.user.vote_set_posts.all()
-    return render_post_list(request, 'my favorite posts', posts)
 
+@login_required
 def upvote_list(request):
     posts = request.user.vote_set_posts.all()
     return render_post_list(request, 'my up voted posts', posts)
 
-@require_POST
+# @require_POST
+# def voting(request, slug):
+#     if request.method == "POST":
+#         post = Post.objects.get(slug=slug)
+#         if post in request.user.upvote_list.all():
+#             post.vote_set.get(user = request.user).delete()
+#             messages.add_message(request,messages.INFO,"WTF Dude!")
+
+#         else:
+#             post.vote_set.create(user=request.user)
+#             messages.add_message(request,messages.INFO,"WOW, Thanks Man!")
+#     return redirect(f'/#post-{post.slug}')
+
 def voting(request, slug):
-    if request.method == "POST":
-        post = Post.objects.get(slug=slug)
-        if post in request.user.upvote_list.all():
-            post.vote_set.get(user = request.user).delete()
-            messages.add_message(request,messages.INFO,"WTF Dude!")
-
-        else:
-            post.vote_set.create(user=request.user)
-            messages.add_message(request,messages.INFO,"WOW, Thanks Man!")
-    return redirect(f'/#post-{post.slug}')
-
-def test_vote(request):
-    post = Post.objects.first()
-    voter = User.objects.first()
-    vote = Vote.objects.create(post = post, voter = voter)
+    post = Post.objects.get(slug=slug)
+    voter = request.user
+    vote = Vote.objects.create(post=post, voter=voter)
     context = {'vote': vote}
-    return render(request, 'test/test_vote.html')
+    return redirect('home')
+    #return render(request, 'test/test_vote.html')
 
 
 # def vo(request, slug):

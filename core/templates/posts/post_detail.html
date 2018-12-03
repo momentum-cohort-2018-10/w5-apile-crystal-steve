@@ -4,8 +4,9 @@
 {% endblock title %}
 
 {% block content %}
-    <h3>{{ post.title }}  {{ post.url }}</h3> 
-    <p>{{ post.description }}</p>
+    <h3>Article: {{ post.title | capfirst }}</h3>   
+    <p>Article Details: {{ post.description | capfirst }}</p>
+    <p>Go to article: <a href="{{ post.url }}">{{ post.url }}</a></p>
     <p>Author: {{ post.author }}</p>
     <a href="{% url 'create_comment' slug=post.slug %}">Comment on {{ post.title }}</a>   ||  
     <a href="{% url 'edit_post' slug=post.slug %}">Edit {{ post.title }}</a>  
@@ -17,7 +18,7 @@
         </form>
     {% endif %}
 
-    <p>Comments on {{ post.title }}:</p>
+    <p>Comments on {{ post.title | capfirst }}:</p>
     {% for comment in post.comment_set.all reversed %}    
     <strong>{{ comment.commenter }} said on {{ comment.created_date }}:</strong>
     <i>{{ comment.comment|linebreaks }}</i>

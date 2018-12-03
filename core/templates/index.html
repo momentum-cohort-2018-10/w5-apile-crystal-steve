@@ -24,17 +24,19 @@
         </section>
         {% endfor %}
         </body> {% endcomment %}
-    {% for post in posts %}
+    {% for post in posts reversed %}
         
-            <h4><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title }}</a></h4>
+            <h4><a href="{% url 'post_detail' slug=post.slug %}">{{ post.title | capfirst }}</a></h4>
         
-        <p>{{ post.description }}</p>
+        <p>Synopsis: {{ post.description | capfirst }}</p>
         <p>Votes: {{post.vote_set.count}}</p>
         <p>Comments: {{ post.comment_set.count }}</p>
+
         {% if request.user.is_authenticated %}
             <form method="POST" action="{% url 'voting' slug=post.slug %}">
             {% csrf_token %}
-            <button type="submit">
+            <button type="submit">Vote</a>
+
                 {% comment %} {% if post in upvote_list %}
 
                 &#xf0aa;
@@ -46,6 +48,7 @@
                 {% endif %} {% endcomment %}
             </button>
             </form>
+
         {% endif %}
     {% endfor %} 
     

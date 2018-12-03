@@ -141,6 +141,7 @@ def upvote_list(request):
 #             messages.add_message(request,messages.INFO,"WOW, Thanks Man!")
 #     return redirect(f'/#post-{post.slug}')
 
+
 def voting(request, slug):
     post = Post.objects.get(slug=slug)
     voter = request.user

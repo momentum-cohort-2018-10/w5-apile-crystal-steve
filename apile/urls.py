@@ -45,6 +45,6 @@ urlpatterns = [
     path('posts/<slug>/comment/', views.create_comment, name='create_comment'),
     path('posts/<slug>/edit/', views.edit_post, name='edit_post'),
     path('posts/<slug>/voting/', views.voting, name="voting"),
-    path('voting/<slug:slug>/',views.voting, name='voting'),
+    path('voting/<slug:slug>/', views.voting, name='voting'),
     path('admin/', admin.site.urls),
 ]

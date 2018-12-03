@@ -123,7 +123,6 @@ def create_comment(request, slug):
         'form': form,
     })
 
-
 @login_required
 def upvote_list(request):
     posts = request.user.vote_set_posts.all()

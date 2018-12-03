@@ -3,7 +3,6 @@ from django.http import Http404, HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.template.defaultfilters import slugify
 from django.shortcuts import render, redirect
-from django.views.decorators.http import require_POST
 from django.db.models import Count
 from core.forms import PostForm, CommentForm
 from core.models import Post, Comment, Vote

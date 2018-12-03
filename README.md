@@ -1,3 +1,6 @@
+#Our Heroku 
+Currently styling isnt completed and there are some bugs we are working on. We are happy to have completed a large majority of the project. Our Heroku page is https://murmuring-temple-78233.herokuapp.com/
+
 # Apile
 
 ![stack by Zach Bogart from the Noun Project](noun-stack.png)
